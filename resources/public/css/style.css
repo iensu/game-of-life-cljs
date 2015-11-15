@@ -1,0 +1,26 @@
+.grid {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+}
+[class*='col-'] {
+    float: left;
+}
+.col-1-10 {
+    width: 10%
+}
+.col-1-50 {
+    width: 2%;
+}
+.col-1-100 {
+    width: 1%;
+}
+.cell {
+    width: 100%;
+    height: 2%;
+    border: solid 1px black;
+    margin: 0;
+}
+.cell.alive {
+    background: red;
+}
