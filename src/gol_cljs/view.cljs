@@ -21,11 +21,15 @@
       grid)))
 
 (defn generate-grid
-  [{:keys [w h]}]
-  (let [column (fn [c] (into []
-                            (for [r (range h)]
-                              :dead)))]
-    (into [] (map column (range w)))))
+  ([config]
+   (generate-grid config #{}))
+  ([{:keys [w h]} alive-coords]
+   (let [column (fn [c] (into []
+                             (for [r (range h)]
+                               (if (contains? alive-coords [c r])
+                                 :alive
+                                 :dead))))]
+     (into [] (map column (range w))))))
 
 (defn create-element
   [{:keys [type classes]}]
