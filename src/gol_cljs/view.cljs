@@ -3,14 +3,14 @@
 (defn within-bounds?
   [grid [x y]]
   (and (< -1  x (count grid))
-       (< -1 y (count (nth grid 0)))))
+       (< -1 y (count (get grid 0)))))
 
 (defn get-cell
   [grid [x y]]
   (if (within-bounds? grid [x y])
     (-> grid
-        (nth x)
-        (nth y))
+        (get x)
+        (get y))
     nil))
 
 (defn update-cell
@@ -23,7 +23,7 @@
 (defn generate-grid
   ([config]
    (generate-grid config #{}))
-  ([{:keys [w h]} alive-coords]
+  ([[w h] alive-coords]
    (let [column (fn [c] (into []
                              (for [r (range h)]
                                (if (contains? alive-coords [c r])
