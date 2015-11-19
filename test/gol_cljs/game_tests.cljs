@@ -26,7 +26,6 @@
             world' #{(Cell. [1 0] :alive) (Cell. [1 1] :alive) (Cell. [1 2] :alive)}]
         (is (= world' (tick world))))))
 
-
   (testing "neighbor-coordinates"
 
     (testing "should return a set of the 8 coordinates around the cell"

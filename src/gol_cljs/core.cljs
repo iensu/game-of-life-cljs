@@ -1,6 +1,6 @@
 (ns ^:figwheel-always gol-cljs.core
-  (:require [gol-cljs.view :refer [generate-grid
-                                   draw-grid!]]
+  (:require [gol-cljs.grid :refer [generate-grid
+                                   grid->html]]
             [gol-cljs.game :refer [tick
                                    Cell]]
             [cljs.core.async :refer [chan >! <! timeout]])
@@ -35,6 +35,13 @@
       (<! (timeout (:speed config)))
       (recur (tick w)))
     c))
+
+(defn draw-grid!
+  [g]
+  (let [app-elem (.getElementById js/document "app")]
+    (->> g
+         grid->html
+         (aset app-elem "innerHTML"))))
 
 (defn run-game
   [world]
