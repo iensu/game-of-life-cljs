@@ -18,22 +18,30 @@
                                     "target"]
 
   :cljsbuild {:builds
-              [{:id "dev"
+              [{:id "prod"
+                :source-paths ["src"]
+                :figwheel {}
+                :compiler {:output-to "resources/public/js/compiled/gol_cljs.js"
+                           :optimizations :advanced
+                           :pretty-print false}}
+
+               {:id "dev"
                 :source-paths ["src" "test"]
-
                 :figwheel {:on-jsload "gol-cljs.test/run"}
-
                 :compiler {:main gol-cljs.core
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/gol_cljs.js"
                            :output-dir "resources/public/js/compiled/out"
+                           :source-map true
                            :source-map-timestamp true}}
+
                {:id "min"
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/gol_cljs.js"
                            :main gol-cljs.core
                            :optimizations :advanced
                            :pretty-print false}}
+
                {:id "test"
                 :source-paths ["src" "test"]
                 :compiler {:output-to "resources/test/compiled/tests.js"
