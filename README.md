@@ -1,12 +1,16 @@
 # gol-cljs
 
-FIXME: Write a one-line description of your library/project.
+Game of Life implemented in ClojureScript.
 
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
+You can read more about Conway's Game of Life [here](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 
 ## Setup
+
+Build by running:
+
+    lein cljsbuild once prod
+
+And open [the index page](resources/public/index.html)
 
 To get an interactive development environment run:
 
@@ -30,10 +34,10 @@ To create a production build run:
     lein cljsbuild once min
 
 And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
+get live reloading, nor a REPL.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2015 Jens Östlund
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
