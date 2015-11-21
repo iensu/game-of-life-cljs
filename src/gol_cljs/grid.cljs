@@ -1,4 +1,4 @@
-(ns ^:figwheel-load gol-cljs.grid)
+(ns gol-cljs.grid)
 
 (defn generate-grid
   ([config]

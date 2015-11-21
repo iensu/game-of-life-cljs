@@ -1,8 +1,7 @@
 (ns ^:figwheel-always gol-cljs.core
-  (:require [gol-cljs.grid :refer [generate-grid
-                                   grid->html]]
-            [gol-cljs.game :refer [tick
-                                   Cell]]
+  (:require [gol-cljs.grid :as grid]
+            [gol-cljs.game :as game]
+            [gol-cljs.worlds :as worlds]
             [cljs.core.async :refer [chan >! <! timeout]])
   (:require-macros [cljs.core.async.macros :refer [go-loop]]))
 
@@ -16,16 +15,16 @@
   (and (< -1 x max-x)
        (< -1 y max-y)))
 
-(def alive-coords-t (comp (filter #(= :alive (:state %)))
-                          (map :pos)
-                          (filter (partial within-bounds? (:size config)))))
+(defn alive-coords-t
+  [size]
+  (comp (filter #(= :alive (:state %)))
+        (map :pos)
+        (filter (partial within-bounds? size))))
 
 (defn world->grid
-  ([w grid-size]
-   (let [alives (into #{} alive-coords-t w)]
-     (generate-grid (:size config) alives)))
-  ([w]
-   (world->grid w (:size config))))
+  [size world]
+  (let [alives (into #{} (alive-coords-t size) world)]
+    (grid/generate-grid size alives)))
 
 (defn world-update-channel
   [start-world]
@@ -33,35 +32,22 @@
     (go-loop [w start-world]
       (>! c w)
       (<! (timeout (:speed config)))
-      (recur (tick w)))
+      (recur (game/tick w)))
     c))
 
 (defn draw-grid!
   [g]
   (let [app-elem (.getElementById js/document "app")]
     (->> g
-         grid->html
+         grid/grid->html
          (aset app-elem "innerHTML"))))
 
 (defn run-game
-  [world]
+  [{:keys [world size]}]
   (let [world-channel (world-update-channel world)]
     (go-loop []
       (let [w (<! world-channel)]
-        (draw-grid! (world->grid w))
+        (draw-grid! (world->grid size w))
         (recur)))))
 
-(defn generate-world
-  [& args]
-  (into #{} (map #(Cell. % :alive) args)))
-
-(def start-world (generate-world [9 8] [9 9] [9 10]))
-(def start-world-2 (generate-world [10 10]
-                                   [9 11] [10 11] [11 11]
-                                   [9 12] [10 12] [11 12]))
-(def start-world-3 (generate-world [ 7  7] [ 8  7] [ 9  7] [10  7] [11  7]
-                                   [ 7  8]         [ 9  8]         [11  8]
-                                   [ 7  9]         [ 9  9]         [11  9]
-                                   [ 7 10]         [ 9 10]         [11 10]
-                                   [ 7 11] [ 8 11] [ 9 11] [10 11] [11 11]))
-(run-game start-world-3)
+(run-game worlds/world-5)
