@@ -17,6 +17,8 @@
                                     "resources/test/compiled"
                                     "target"]
 
+  :hooks [leiningen.cljsbuild]
+
   :cljsbuild {:builds
               [{:id "prod"
                 :source-paths ["src"]
