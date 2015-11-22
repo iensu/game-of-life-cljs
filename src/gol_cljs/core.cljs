@@ -50,4 +50,4 @@
         (draw-grid! (world->grid size w))
         (recur)))))
 
-(run-game worlds/world-5)
+(run-game worlds/world-6)
