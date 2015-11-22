@@ -2,6 +2,7 @@
     width: 500px;
     height: 500px;
     margin: auto;
+    border: solid 1px black;
 }
 
 [class*='col-'] {
@@ -22,15 +23,14 @@
 }
 
 [class*='cell-'] {
-    border: solid 1px black;
     margin: 0;
     width: 100%;
 }
 [class*='cell-'].alive {
-    background: black;
+    background: #3832ed;
 }
 [class*='cell-'].dead {
-    background: white;
+    background: #eeeeee;
 }
 
 .cell-1-10 {
