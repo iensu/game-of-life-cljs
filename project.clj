@@ -19,6 +19,8 @@
 
   :hooks [leiningen.cljsbuild]
 
+  :min-lein-version "2.0.0"
+
   :cljsbuild {:builds
               [{:id "prod"
                 :source-paths ["src"]
