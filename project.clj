@@ -17,9 +17,7 @@
                                     "resources/test/compiled"
                                     "target"]
 
-  :hooks [leiningen.cljsbuild]
-
-  :min-lein-version "2.0.0"
+  :min-lein-version "2.5.3"
 
   :cljsbuild {:builds
               [{:id "prod"
