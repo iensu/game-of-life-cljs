@@ -1,8 +1,7 @@
 (ns ^:figwheel-always gol-cljs.test
-  (:require [cljs.test :refer-macros [run-all-tests]]))
+  (:require [doo.runner :refer-macros [doo-tests]]
+            [gol-cljs.game-tests]
+            [gol-cljs.grid-tests]))
 
-(enable-console-print!)
-
-(defn ^:export run
-  []
-  (run-all-tests #"gol-cljs.*-tests"))
+(doo-tests 'gol-cljs.game-tests
+           'gol-cljs.grid-tests)

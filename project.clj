@@ -9,7 +9,8 @@
                  [org.clojure/core.async "0.2.374"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
-            [lein-figwheel "0.5.0-1"]]
+            [lein-figwheel "0.5.0-2"]
+            [lein-doo "0.1.6-rc.1"]]
 
   :source-paths ["src"]
 
@@ -47,14 +48,10 @@
                {:id "test"
                 :source-paths ["src" "test"]
                 :compiler {:output-to "resources/test/compiled/tests.js"
-                           :optimizations :whitespace
-                           :pretty-print false
-                           :notify-command ["phantomjs"
-                                            "resources/test/test_runner.js"
-                                            "resources/test/test_runner.html"]}}]
-              :test-commands [{"test" ["phantomjs"
-                           "resources/test/test_runner.js"
-                           "resources/test/test_runner.html"]}]}
+                           :output-dir "resources/test/compiled"
+                           :main gol-cljs.test
+                           :target :nodejs}}]
+}
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
