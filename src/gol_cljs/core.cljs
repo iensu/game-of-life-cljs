@@ -7,8 +7,7 @@
 
 (enable-console-print!)
 
-(def config {:size [20 20]
-             :speed 500})
+(def config {:speed 250})
 
 (defn within-bounds?
   [[max-x max-y] [x y]]

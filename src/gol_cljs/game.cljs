@@ -18,10 +18,8 @@
 
 (defn alive-neighbors
   [ns]
-  (let [alive? (fn [c]
-                 (= :alive (:state c)))]
-    (comp (filter #(alive? %))
-          (filter #(contains? ns (:pos %))))))
+  (comp (filter #(alive? %))
+        (filter #(contains? ns (:pos %)))))
 
 (defmulti will-live? :state)
 
