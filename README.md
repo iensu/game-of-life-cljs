@@ -4,11 +4,13 @@ Game of Life implemented in ClojureScript.
 
 You can read more about Conway's Game of Life [here](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life).
 
+Demo: <http://gol-cljs.herokuapp.com>
+
 ## Setup
 
 Build by running:
 
-    lein cljsbuild once prod
+    lein run
 
 And open [the index page](resources/public/index.html)
 
